@@ -1,0 +1,86 @@
+---
+title: "Peluang Kemitraan"
+date: 2025-10-04
+draft: false
+description: "Jadilah distributor resmi Pupuk Macan Lembah. Bergabunglah dengan jaringan kami dan bangun bisnis yang menguntungkan dengan produk berkualitas tinggi."
+subtitle: "Bangun Bisnis Anda Bersama Kami"
+---
+
+<section class="py-16 md:py-20 bg-stone-50">
+    <div class="container mx-auto px-6">
+        <div class="max-w-3xl mx-auto">
+            
+            <div class="text-center mb-12">
+                <p class="text-lg text-gray-600 leading-relaxed">
+                    Kami membuka peluang bagi Anda yang ingin menjadi bagian dari kesuksesan Pupuk Macan Lembah dengan menjadi distributor resmi di wilayah Anda. Dapatkan produk berkualitas tinggi dengan legalitas penuh dan dukungan dari kami.
+                </p>
+                <p class="mt-4 text-lg text-gray-600 leading-relaxed">
+                    Silakan isi formulir di bawah ini untuk verifikasi area pendistribusian.
+                </p>
+            </div>
+
+            <form id="form-kemitraan" class="bg-white p-8 border border-gray-200 rounded-lg shadow-md space-y-6">
+                
+                <div>
+                    <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama Lengkap</label>
+                    <input type="text" id="nama" name="nama" required class="block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-gold focus:border-brand-gold" placeholder="Contoh: Budi Santoso">
+                </div>
+
+                <div>
+                    <label for="kontak" class="block text-sm font-medium text-gray-700 mb-2">Nomor WhatsApp Aktif</label>
+                    <input type="tel" id="kontak" name="kontak" required class="block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-gold focus:border-brand-gold" placeholder="Contoh: 081234567890">
+                </div>
+
+                <div>
+                    <label for="alamat" class="block text-sm font-medium text-gray-700 mb-2">Alamat Lengkap (Domisili)</label>
+                    <textarea id="alamat" name="alamat" rows="4" required class="block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-gold focus:border-brand-gold" placeholder="Contoh: Jl. Merdeka No. 10, Kecamatan Gresik, Kabupaten Gresik"></textarea>
+                </div>
+
+                <div>
+                    <label for="wilayah" class="block text-sm font-medium text-gray-700 mb-2">Wilayah Distribusi yang Diajukan</label>
+                    <input type="text" id="wilayah" name="wilayah" required class="block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-brand-gold focus:border-brand-gold" placeholder="Contoh: Kabupaten Gresik & Surabaya">
+                </div>
+
+                <div>
+                    <button type="submit" id="kirim-wa-btn" class="w-full flex justify-center items-center py-4 px-6 border border-transparent rounded-full shadow-sm text-lg font-bold text-white bg-brand-green hover:bg-green-800 transition duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-green">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-3" viewBox="0 0 24 24" style="fill: white;"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.487 5.235 3.487 8.413 0 6.557-5.338 11.892-11.894 11.892-1.99 0-3.903-.506-5.613-1.459l-6.162 1.688a.5.5 0 0 1-.612-.611zM11.894 2.909c-4.913 0-8.908 3.995-8.908 8.907.001 1.834.572 3.588 1.574 5.082l-.01.015-.992 3.627 3.71-1.012.016-.008a8.945 8.945 0 0 0 4.61 1.374c4.913 0 8.908-3.995 8.908-8.907s-3.995-8.907-8.908-8.907zM17.351 14.116c-.227-.112-1.334-.658-1.542-.733-.207-.075-.357-.112-.507.112s-.583.733-.715.883-.264.168-.49.056c-.227-.112-.947-.349-1.804-.9-1.041-1.041-1.748-1.845-1.956-2.164-.207-.319-.01-.487.102-.6c.09-.102.227-.267.34-.398.112-.132.149-.227.224-.377s.038-.281-.019-.398c-.056-.112-.507-1.217-.692-1.666-.185-.448-.37-.386-.507-.392-.127-.006-.277-.006-.427-.006s-.393.056-.612.28c-.22.224-.834.81-.834 1.968s.851 2.285.975 2.448c.124.164 1.672 2.572 4.051 3.588.589.24 1.053.38 1.423.494.56.167 1.065.143 1.442.086.416-.063 1.334-.545 1.52-1.071s.185-.975.13-1.071c-.055-.096-.205-.158-.425-.27z"></path></svg>
+                        Kirim Pendaftaran via WhatsApp
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const formKemitraan = document.getElementById('form-kemitraan');
+        if (formKemitraan) {
+            formKemitraan.addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                // 1. Ambil data dari semua input
+                const nama = document.getElementById('nama').value.trim();
+                const kontak = document.getElementById('kontak').value.trim();
+                const alamat = document.getElementById('alamat').value.trim();
+                // -- AMBIL DATA INPUT BARU --
+                const wilayah = document.getElementById('wilayah').value.trim();
+
+                // 2. Validasi: pastikan semua input terisi
+                if (!nama || !kontak || !alamat || !wilayah) { // -- TAMBAHKAN VALIDASI BARU --
+                    alert('Mohon lengkapi semua data: Nama, Kontak, Alamat, dan Wilayah Distribusi.');
+                    return;
+                }
+
+                const nomorTujuan = '6285857871536';
+
+                // 4. Rangkai pesan, tambahkan data baru
+                const pesan = `Halo, saya tertarik untuk menjadi mitra distributor Pupuk Macan Lembah.\n\nBerikut data saya:\n\n*Nama:* ${nama}\n*Kontak (WA):* ${kontak}\n*Alamat Domisili:* ${alamat}\n*Wilayah Distribusi Diajukan:* ${wilayah}\n\nMohon informasi lebih lanjut mengenai program kemitraan. Terima kasih.`;
+
+                const urlWhatsApp = `https://wa.me/${nomorTujuan}?text=${encodeURIComponent(pesan)}`;
+                window.open(urlWhatsApp, '_blank');
+            });
+        }
+    });
+</script>

@@ -1,0 +1,32 @@
+{{/* File: layouts/_default/baseof.html (Versi Benar) */}}
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    {{/* Mengambil judul dan deskripsi dari front matter setiap halaman */}}
+    <title>{{ .Title }} | Macan Lembah</title>
+    <meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <meta name="keywords" content="pupuk npk, pupuk sp-36, pupuk non-subsidi, npk 15-15-15, distributor pupuk, agen pupuk, pupuk sni">
+    <meta name="author" content="PT. Sultan Iskandar Muda">
+
+    {{/* Memanggil semua CSS, JS library, dan config dari satu partial yang rapi */}}
+    {{ partial "framework.html" . }}
+</head>
+
+<body class="bg-stone-50 text-gray-800 font-sans">
+    
+    {{/* Memanggil Navbar */}}
+	{{ partial "navbar.html" . }}
+
+    {{/* Area konten utama yang akan diisi oleh layout lain (seperti index.html atau single.html) */}}
+    <main>
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    {{/* Memanggil Footer, pastikan dengan titik (.) */}}
+    {{ partial "footer.html" . }}
+    
+</body>
+</html>

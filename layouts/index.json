@@ -1,0 +1,27 @@
+{{- $propertyData := slice -}}
+{{- range where (where site.RegularPages "Type" "blog") "Draft" false -}}
+  {{- $item := dict
+      "id" (.Params.listing_id | default .RelPermalink)
+      "name" (.Params.title | default .Title)
+      "location" (.Params.location | default "Unknown")
+      "price" (.Params.price | default "N/A")
+      "price_numeric" (.Params.price_numeric | default 0)
+      "image" (.Params.image | default "")
+      "galleryImages" (.Params.galleryImages | default slice)
+      "bedrooms" (.Params.bedrooms | default 0)
+      "bathrooms" (.Params.bathrooms | default 0)
+      "area" (.Params.area | default 0)
+      "land_area" (.Params.land_area | default 0)
+      "type" (.Params.tipe | default "Unknown")
+      "description" (.Params.description | default "")
+      "facilities" (.Params.facilities | default slice)
+      "categories" (.Params.categories | default slice)
+      "tags" (.Params.tags | default slice)
+      "status" (.Params.status | default "Unknown")
+      "featured" (.Params.featured | default false)
+      "date_published" (.Date.Format "2006-01-02T15:04:05Z07:00")
+      "permalink" .RelPermalink
+  -}}
+  {{- $propertyData = $propertyData | append $item -}}
+{{- end -}}
+{{- $propertyData | jsonify (dict "indent" "  ") -}}

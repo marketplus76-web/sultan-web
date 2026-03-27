@@ -1,0 +1,38 @@
+<meta name="color-scheme" content="light dark">
+{{ $desc := "lol" }}
+
+  {{ if .Description }}
+  {{ $desc = .Description }}
+  {{ else if .Summary }}
+  {{ $desc =  .Summary | plainify | truncate 150 }}
+  {{ else }}
+  {{ $desc = printf "Download %s Magisk | KernelSU | APATCH modules" .Title | truncate 150 "" | safeHTML }}
+ {{ end }}
+
+
+<meta name="description" content="{{ $desc }}">
+<meta name="generator" content="Curex 0.109.0">
+<meta name="author"  content="{{ .Site.Params.author | default .Page.Params.Author }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<!-- js -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ .Title | truncate 20 "" }},
+  "url": "{{ .Permalink | absURL }}",
+  "description": {{ $desc }},
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ .Title | truncate 20 "" }}
+    {{ with .Site.Params.logo }},
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ . | absURL }}",
+      "width": 96,
+      "height": 96
+    }{{ end }}
+  }
+}
+</script>
+<meta name="robots" content="index, follow">

@@ -1,0 +1,10 @@
+<main>
+{{ if .Params.home_style }}
+<article>
+{{ else }}
+<article class="blog-article">
+{{ end }}
+<h1>{{ .Title }}</h1>
+{{ .Content }}
+</article>
+</main>

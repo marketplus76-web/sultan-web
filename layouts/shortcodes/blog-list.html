@@ -1,0 +1,20 @@
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">Name Magisk Module</th>
+    </tr>
+  </thead>
+{{ range first 15 (where .Site.RegularPages "Type" "module") }}
+<tbody>
+    <tr>
+      <td class="tddd"><a class="game_link" href="{{ .RelPermalink }}">{{ .Title }}</a></td>
+    </tr>
+  </tbody>
+{{ end }}
+</table>
+
+{{ $modules := where .Site.RegularPages "Type" "module" }}
+
+<div class="img-download-btn">
+  <a href="/module" class="download-button">see {{ len $modules }} other magisk modules</a>
+</div>

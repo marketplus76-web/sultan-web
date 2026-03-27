@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jual Pupuk NPK 15-15-15 & SP-36 Non-Subsidi SNI - Macan Lembah</title>
+    <meta name="description" content="PT. Sultan Iskandar Muda menyediakan Pupuk NPK Macan Lembah 15-15-15 dan SP-36 non-subsidi kualitas terbaik dengan legalitas penuh (SNI) dan komitmen mutu ISO 9001:2015.">
+    {{ partial "framework.html" . }}
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap');
+
+        /* --- STYLES UNTUK ANIMASI INTRO (SPLASH SCREEN) --- */
+        #intro-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: linear-gradient(to bottom, #81D4FA 0%, #E1F5FE 100%);
+            z-index: 100000; overflow: hidden; display: flex; flex-direction: column;
+            align-items: center; justify-content: flex-end; font-family: 'Poppins', sans-serif;
+            transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.6s;
+        }
+
+        .intro-hidden { transform: translateY(-100%); opacity: 0; pointer-events: none; }
+
+        #scene { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 20px; }
+        .sun { position: absolute; top: 40px; left: 40px; width: 80px; height: 80px; background: radial-gradient(circle, #FFFDE7 0%, #FFF176 100%); border-radius: 50%; box-shadow: 0 0 60px rgba(255, 241, 118, 0.8); z-index: 1; }
+        .mountain { position: absolute; bottom: 120px; width: 0; height: 0; border-left: 150px solid transparent; border-right: 150px solid transparent; border-bottom: 200px solid #4FC3F7; z-index: 5; opacity: 0.6; }
+        .m-left { left: -100px; border-bottom-color: #29B6F6; }
+        .m-right { right: -100px; border-bottom-color: #039BE5; transform: scale(1.4); }
+        
+        .ground { position: absolute; bottom: 0; width: 100%; height: 120px; background: #3E2723; border-top: 8px solid #5D4037; z-index: 10; transition: background-color 0.5s; }
+        .grass { position: absolute; bottom: 115px; width: 100%; height: 25px; background: #4CAF50; z-index: 9; clip-path: polygon(0% 100%, 5% 0%, 10% 100%, 15% 0%, 20% 100%, 25% 0%, 30% 100%, 35% 0%, 40% 100%, 45% 0%, 50% 100%, 55% 0%, 60% 100%, 65% 0%, 70% 100%, 75% 0%, 80% 100%, 85% 0%, 90% 100%, 95% 0%, 100% 100%); }
+
+        /* Tanaman - Container diperbaiki agar stabil di tengah */
+        .plant-container { position: absolute; bottom: 115px; left: 50%; transform: translateX(-50%) scale(0.9); z-index: 15; transform-origin: bottom center; transition: transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        #plant-svg { width: 180px; height: auto; display: block; overflow: visible; }
+        .leaf { transform-origin: center bottom; transform: scale(0); transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .stem { stroke-dasharray: 200; stroke-dashoffset: 0; stroke: #4CAF50; stroke-width: 6; fill: none; transition: stroke 1s; }
+        .fruit { transform: scale(0); transform-origin: center; transition: transform 0.5s cubic-bezier(0.6, -0.28, 0.735, 0.045); }
+
+        /* Karung Pupuk - Pergerakan yang disesuaikan */
+        .fertilizer-bag { position: absolute; top: 20%; left: 150%; transform: translateX(-50%); width: 160px; z-index: 30; transition: left 0.8s ease-out, transform 0.3s ease; }
+        .bag-body { width: 100%; height: 220px; background: linear-gradient(135deg, #0D47A1, #1565C0); border-radius: 10px; border: 2px solid white; box-shadow: 0 10px 25px rgba(0,0,0,0.3); display: flex; flex-direction: column; align-items: center; overflow: hidden; }
+        .bag-stripe { width: 100%; height: 35px; background: repeating-linear-gradient(45deg, #FF9800, #FF9800 10px, #212121 10px, #212121 20px); border-bottom: 2px solid white; }
+        .logo-circle { background: white; border-radius: 50%; width: 80px; height: 80px; margin-top: -15px; display: flex; align-items: center; justify-content: center; border: 4px solid #FF9800; z-index: 2; }
+        .formula-badge { margin-top: auto; margin-bottom: 15px; background: #FF3D00; color: white; padding: 4px 12px; border-radius: 5px; font-weight: bold; font-size: 1rem; border: 1px solid white; }
+        
+        .overlay-text { position: absolute; top: 12%; width: 100%; text-align: center; z-index: 40; opacity: 0; transform: translateY(20px); transition: 0.6s; padding: 0 20px; }
+        .active-text { opacity: 1; transform: translateY(0); }
+        
+        @keyframes shake { 0% { transform: translateX(-50%) rotate(0deg); } 25% { transform: translateX(-50%) rotate(12deg); } 75% { transform: translateX(-50%) rotate(-12deg); } 100% { transform: translateX(-50%) rotate(0deg); } }
+        .shaking { animation: shake 0.3s ease-in-out infinite; }
+        #particles-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 25; pointer-events: none; }
+        
+        body.no-scroll { overflow: hidden; height: 100vh; }
+
+        /* --- UTAMA WEBSITE STYLES --- */
+        .swiper-slide-content { background-size: cover; background-position: center; }
+        .cta-section { background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2070&auto-format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; }
+        .icon-box { transition: all 0.3s ease-in-out; }
+        .icon-box:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+        .swiper-pagination-bullet-active { background-color: #E6A400 !important; }
+        .swiper-button-next, .swiper-button-prev { color: #E6A400 !important; }
+        .card-active { transform: translateY(1px); box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.7); }
+        .card-active h3 { color: #3B82F6; }
+    </style>
+</head>
+<body class="bg-stone-50 text-gray-800 font-sans no-scroll">
+
+    <!-- 1. INTRO ANIMASI (SPLASH SCREEN) -->
+    <div id="intro-screen">
+        <div id="scene">
+            <div class="sun"></div>
+            <div class="mountain m-left"></div>
+            <div class="mountain m-right"></div>
+            
+            <div id="text-1" class="overlay-text active-text">
+                <h1 class="text-3xl md:text-5xl font-black text-blue-900 uppercase"><em>Ingin hasil produksi Tanaman meningkat?</em></h1>
+                <p class="text-xl text-blue-800 mt-2 font-bold">Jangan biarkan hasil panen menurun!</p>
+            </div>
+            <div id="text-2" class="overlay-text">
+                <h1 class="text-3xl md:text-5xl font-black text-orange-600 uppercase"><em>Nutrisi Raja Lembah!</em></h1>
+                <p class="text-xl text-blue-900 mt-2 font-bold">Rahasia Pertanian Berjaya</p>
+            </div>
+            <div id="text-3" class="overlay-text">
+                <div class="bg-white/95 p-8 rounded-3xl shadow-2xl inline-block border-b-8 border-orange-600">
+                    <h1 class="text-3xl md:text-5xl font-black text-blue-900 uppercase"><em>MACAN LEMBAH</em></h1>
+                    <p class="text-xl text-orange-600 font-black mt-1 uppercase"><strong>Tumbuh Cepat, Hasil Melimpah!</strong></p>
+                    <button onclick="enterWebsite()" class="bg-brand-green text-white font-black py-4 px-12 rounded-full mt-6 shadow-lg hover:scale-105 transition border-2 border-white">
+                        MASUK KE WEBSITE 🐯
+                    </button>
+                </div>
+            </div>
+
+            <div id="bag" class="fertilizer-bag">
+                <div class="bag-body">
+                    <div class="bag-stripe"></div>
+                    <div class="logo-circle"><span style="font-size:50px">🐯</span></div>
+                    <div class="text-white font-black text-center text-xs mt-3 uppercase leading-tight">MACAN<br>LEMBAH</div>
+                    <div class="mt-auto mb-4 bg-orange-600 text-white text-[10px] px-3 py-1 rounded font-bold">15-15-15</div>
+                </div>
+            </div>
+
+            <canvas id="particles-canvas"></canvas>
+
+            <div class="plant-container" id="plant-container">
+                <svg id="plant-svg" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+                    <path class="stem" d="M50 150 Q50 100 50 50" />
+                    <g class="leaf" style="transform-origin: 50px 100px;"><path d="M50 100 Q15 80 5 110 Q35 135 50 100" fill="#43A047" /></g>
+                    <g class="leaf" style="transform-origin: 50px 115px;"><path d="M50 115 Q85 95 95 125 Q65 145 50 115" fill="#43A047" /></g>
+                    <g class="leaf" style="transform-origin: 50px 75px;"><path d="M50 75 Q15 45 5 75 Q35 95 50 75" fill="#2E7D32" /></g>
+                    <g class="leaf" style="transform-origin: 50px 85px;"><path d="M50 85 Q85 55 95 85 Q65 105 50 85" fill="#2E7D32" /></g>
+                    <g class="leaf" style="transform-origin: 50px 50px;"><path d="M50 50 Q30 20 50 5 Q70 20 50 50" fill="#1B5E20" /></g>
+                    <circle class="fruit" cx="30" cy="85" r="8" fill="#FF3D00" />
+                    <circle class="fruit" cx="75" cy="95" r="9" fill="#FF3D00" />
+                    <circle class="fruit" cx="50" cy="45" r="10" fill="#FF3D00" />
+                </svg>
+            </div>
+            <div class="grass"></div>
+            <div class="ground"></div>
+        </div>
+
+        <div class="fixed bottom-10 z-50">
+            <button id="actionBtn" onclick="nextStep()" class="bg-blue-800 text-white font-black py-4 px-12 rounded-full shadow-2xl border-4 border-white animate-bounce uppercase tracking-wider">
+                Mulai Demo 🐯
+            </button>
+        </div>
+    </div>
+
+    <!-- 2. KONTEN UTAMA (DATA ASLI WAHYU) -->
+    <div id="main-content">
+        {{ partial "navbar.html" . }}
+
+        <main>
+            <section class="relative h-screen -mt-[76px]">
+                <div class="swiper mySwiper h-full">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide"><div class="swiper-slide-content h-full w-full flex items-center justify-center text-center text-white" style="background-image: linear-gradient(rgba(26, 67, 20, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1560493676-04071c5f467b?q=80&w=1974&auto-format&fit=crop');"><div class="container mx-auto px-6"><h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 tracking-tight">Solusi Nutrisi untuk Panen Melimpah</h1><p class="text-lg md:text-xl text-gray-200 mb-10 max-w-3xl mx-auto">Pupuk NPK & SP-36 Non-Subsidi Macan Lembah.</p><a href="https://wa.me/6285857871536" target="_blank" class="bg-brand-gold text-brand-green font-bold py-4 px-10 rounded-full text-lg hover:bg-yellow-400 transition duration-300 inline-flex items-center shadow-lg"><i data-lucide="whatsapp" class="mr-2"></i> Konsultasi & Pemesanan</a></div></div></div>
+                        <div class="swiper-slide"><div class="swiper-slide-content h-full w-full flex items-center justify-center text-center text-white" style="background-image: linear-gradient(rgba(26, 67, 20, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1492944431259-24b616421966?q=80&w=2070&auto-format&fit=crop');"><div class="container mx-auto px-6"><h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 tracking-tight">Kualitas Teruji Berstandar SNI</h1><p class="text-lg md:text-xl text-gray-200 mb-10 max-w-3xl mx-auto">Kepercayaan dan legalitas penuh untuk hasil pertanian terbaik.</p><a href="/kemitraan/" class="bg-brand-gold text-brand-green font-bold py-4 px-10 rounded-full text-lg hover:bg-yellow-400 transition duration-300 inline-flex items-center shadow-lg"><i data-lucide="handshake" class="mr-2"></i> Peluang Distributor</a></div></div></div>
+                    </div>
+                    <div class="swiper-button-next"></div><div class="swiper-button-prev"></div><div class="swiper-pagination"></div>
+                </div>
+            </section>
+
+            <section class="py-20 bg-white">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-bold text-brand-green">Kenapa Memilih Macan Lembah?</h2><p class="text-gray-600 mt-2">Fondasi kepercayaan untuk kesuksesan pertanian Anda.</p></div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                        <div class="icon-box bg-stone-50 p-8 rounded-xl text-center border"><div class="bg-brand-green text-white w-16 h-16 rounded-full mx-auto flex items-center justify-center mb-4"><i data-lucide="shield-check" class="w-8 h-8"></i></div><h3 class="text-xl font-bold text-brand-green mb-2">Kualitas Terjamin</h3><p class="text-gray-600">Formula NPK 15-15-15 dan SP-36 seimbang & konsisten.</p></div>
+                        <div class="icon-box bg-stone-50 rounded-xl text-center border p-8"><div class="bg-brand-green text-white w-16 h-16 rounded-full mx-auto flex items-center justify-center mb-4"><i data-lucide="award" class="w-8 h-8"></i></div><h3 class="text-xl font-bold text-brand-green mb-2">Legalitas Penuh</h3><p class="text-gray-600">Terdaftar SNI, KEMTAN, dan NIB. Bisnis aman & terpercaya.</p></div>
+                        <div class="icon-box bg-stone-50 p-8 rounded-xl text-center border"><div class="bg-brand-green text-white w-16 h-16 rounded-full mx-auto flex items-center justify-center mb-4"><i data-lucide="leaf" class="w-8 h-8"></i></div><h3 class="text-xl font-bold text-brand-green mb-2">100% Non-Subsidi</h3><p class="text-gray-600">Kandungan unsur hara murni sesuai standar, hasil maksimal.</p></div>
+                        <div class="icon-box bg-stone-50 p-8 rounded-xl text-center border"><div class="bg-brand-green text-white w-16 h-16 rounded-full mx-auto flex items-center justify-center mb-4"><i data-lucide="truck" class="w-8 h-8"></i></div><h3 class="text-xl font-bold text-brand-green mb-2">Stok Selalu Aman</h3><p class="text-gray-600">Pasokan terjamin dengan kualitas produksi, kami mengedepankan standar mutu dan kualitas terbaik.</p></div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="produk" class="py-20 bg-stone-50">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-bold text-brand-green">Produk Unggulan & Desain Kemasan</h2><p class="text-gray-600 mt-2">Diformulasikan secara presisi untuk setiap tahap pertumbuhan tanaman.</p></div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                        <a href="/produk/" class="product-card block bg-white rounded-lg shadow-lg overflow-hidden group transition duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-2"><div class="overflow-hidden"><img src="/img/product/IMG-20251001-WA0017.jpg" alt="Karung Pupuk NPK Macan Lembah" class="w-full h-96 object-contain p-4 group-hover:scale-105 transition-transform duration-500"></div><div class="p-8"><h3 class="text-2xl font-bold text-brand-green mb-3">Pupuk NPK Macan Lembah 15-15-15</h3><p class="text-gray-600 mb-4">Nutrisi seimbang untuk pertumbuhan vegetatif dan generatif yang kuat.</p></div></a>
+                        <a href="/produk/" class="product-card block bg-white rounded-lg shadow-lg overflow-hidden group transition duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-2"><div class="overflow-hidden"><img src="/img/product/IMG-20251001-WA0013.jpg" alt="Karung Pupuk SP-36 Macan Lembah" class="w-full h-96 object-contain p-4 group-hover:scale-105 transition-transform duration-500"></div><div class="p-8"><h3 class="text-2xl font-bold text-brand-green mb-3">Pupuk SP-36 Macan Lembah</h3><p class="text-gray-600 mb-4">Memacu pertumbuhan akar yang kokoh dan memaksimalkan kualitas panen.</p></div></a>
+                        <a href="/produk/" class="product-card block bg-white rounded-lg shadow-lg overflow-hidden group transition duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-2"><div class="overflow-hidden"><img src="/img/product/IMG-20251001-WA0011.jpg" alt="Desain Karung Pupuk NPK" class="w-full h-96 object-cover p-4 group-hover:scale-105 transition-transform duration-500"></div><div class="p-8"><h3 class="text-2xl font-bold text-brand-green mb-3">Desain Klasik NPK</h3><p class="text-gray-600 mb-4">Kemasan standar pupuk NPK Macan Lembah yang ikonik dan mudah dikenali.</p></div></a>
+                        <a href="/produk/" class="product-card block bg-white rounded-lg shadow-lg overflow-hidden group transition duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-2"><div class="overflow-hidden"><img src="/img/product/IMG-20251001-WA0012.jpg" alt="Desain Karung Pupuk Phonska" class="w-full h-96 object-cover p-4 group-hover:scale-105 transition-transform duration-500"></div><div class="p-8"><h3 class="text-2xl font-bold text-brand-green mb-3">Varian NPK Phonskha</h3><p class="text-gray-600 mb-4">Desain khusus untuk varian NPK Phonskha dengan formulasi terpercaya.</p></div></a>
+                        <a href="/produk/" class="product-card block bg-white rounded-lg shadow-lg overflow-hidden group transition duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-2"><div class="overflow-hidden"><img src="/img/product/IMG-20251001-WA0014.jpg" alt="Desain Karung Pupuk Kopi" class="w-full h-96 object-cover p-4 group-hover:scale-105 transition-transform duration-500"></div><div class="p-8"><h3 class="text-2xl font-bold text-brand-green mb-3">NPK Khusus Kopi</h3><p class="text-gray-600 mb-4">Kemasan yang didedikasikan untuk pupuk NPK dengan formulasi optimal bagi tanaman kopi.</p></div></a>
+                        <a href="/produk/" class="product-card block bg-white rounded-lg shadow-lg overflow-hidden group transition duration-300 ease-in-out hover:shadow-2xl hover:-translate-y-2"><div class="overflow-hidden"><img src="/img/product/IMG-20251004-WA0009.jpg" alt="Desain Karung Pupuk Hortikultura" class="w-full h-96 object-cover p-4 group-hover:scale-105 transition-transform duration-500"></div><div class="p-8"><h3 class="text-2xl font-bold text-brand-green mb-3">NPK Hortikultura</h3><p class="text-gray-600 mb-4">Desain kemasan NPK untuk berbagai jenis tanaman buah dan sayuran.</p></div></a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="komitmen" class="py-20 bg-brand-green text-white">
+                <div class="container mx-auto px-6 text-center"><div class="max-w-4xl mx-auto"><div class="bg-white text-brand-green w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-6 shadow-lg"><i data-lucide="gem" class="w-10 h-10"></i></div><h2 class="text-3xl md:text-4xl font-bold mb-4">Kebijakan Mutu Kami</h2><p class="text-lg md:text-xl text-gray-200 leading-relaxed max-w-3xl mx-auto">PT. Sultan Iskandar Muda mempunyai komitmen memenuhi kepuasan pelanggan dengan menyediakan pupuk yang berkualitas, sesuai persyaratan pelanggan dan peraturan perundang-undangan melalui penerapan sistem manajemen mutu <span class="font-bold text-brand-gold">ISO 9001:2015</span> dan senantiasa melakukan perbaikan mutu secara berkesinambungan.</p></div></div>
+            </section>
+            
+            <section id="galeri" class="py-20 bg-stone-50">
+                <div class="container mx-auto px-6">
+                    <div class="text-center mb-12"><h2 class="text-3xl md:text-4xl font-bold text-brand-green">Galeri & Aktivitas Kami</h2><p class="text-gray-600 mt-2">Transparansi kualitas dan proses distribusi kami secara nyata.</p></div>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden"><video class="w-full h-full object-cover" controls loop muted playsinline><source src="/video/VID-20251001-WA0016.mp4" type="video/mp4">Browser Anda tidak mendukung tag video.</video><div class="p-4"><h3 class="font-semibold text-brand-green">Proses Muat & Distribusi</h3></div></div>
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden"><video class="w-full h-full object-cover" controls loop muted playsinline><source src="/video/VID-20251001-WA0018.mp4" type="video/mp4">Browser Anda tidak mendukung tag video.</video><div class="p-4"><h3 class="font-semibold text-brand-green">Kualitas Butiran NPK</h3></div></div>
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden"><video class="w-full h-full object-cover" controls loop muted playsinline><source src="/video/VID-20251001-WA0015.mp4" type="video/mp4">Browser Anda tidak mendukung tag video.</video><div class="p-4"><h3 class="font-semibold text-brand-green">Kualitas Butiran SP-36</h3></div></div>
+                        <div class="bg-white rounded-lg shadow-lg overflow-hidden"><video class="w-full h-full object-cover" controls loop muted playsinline><source src="/video/VID-20251015-WA0004.mp4" type="video/mp4">Browser Anda tidak mendukung tag video.</video><div class="p-4"><h3 class="font-semibold text-brand-green">Kualitas Butiran SP-36</h3></div></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="blog" class="py-20 bg-white">
+                <div class="container mx-auto px-6 text-center">
+                    <div class="max-w-2xl mx-auto">
+                        <div class="bg-stone-100 text-brand-green w-20 h-20 rounded-full mx-auto flex items-center justify-center mb-6"><i data-lucide="notebook-pen" class="w-10 h-10"></i></div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-brand-green">Blog & Wawasan Pertanian</h2>
+                        <p class="text-gray-600 mt-4 text-lg">Segera hadir! Kami akan berbagi tips, panduan pemupukan, dan berita terbaru dari dunia pertanian untuk membantu Anda mencapai hasil panen terbaik.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="kemitraan" class="py-20 cta-section text-white">
+                <div class="container mx-auto px-6 text-center"><h2 class="text-3xl md:text-4xl font-bold mb-4">Jadilah Mitra Sukses Kami</h2><p class="text-gray-200 max-w-3xl mx-auto mb-10">Bangun bisnis yang menguntungkan dengan menjadi distributor resmi Pupuk Macan Lembah. Produk berkualitas tinggi dengan pasar yang luas menanti Anda.</p><a href="/kemitraan/" class="bg-brand-orange text-white font-bold py-4 px-10 rounded-full text-lg hover:bg-orange-600 transition duration-300 inline-flex items-center shadow-lg"><i data-lucide="handshake" class="mr-2"></i> Informasi Kemitraan</a></div>
+            </section>
+
+            <section id="tentang" class="py-20 bg-stone-50">
+                <div class="container mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+                    <div class="relative">
+                        <img src="/img/pabrik-gresik.jpg" alt="Fasilitas Produksi Pupuk Macan Lembah di Gresik" class="rounded-lg shadow-2xl w-full">
+                        <div class="absolute -bottom-6 -right-6 md:-bottom-8 md:-right-8 bg-brand-green text-white p-5 md:p-6 rounded-lg shadow-xl max-w-xs flex items-start space-x-3">
+                            <div class="flex-shrink-0"><i data-lucide="map-pin" class="w-6 h-6 text-brand-gold"></i></div>
+                            <div><h4 class="font-bold text-lg leading-tight">Tersedia di berbagai daerah</h4><p class="text-sm text-gray-200 mt-1">Pusat industri dan distribusi untuk menjangkau seluruh Indonesia.</p></div>
+                        </div>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-brand-green mb-4">PT. Sultan Iskandar Muda</h2>
+                        <p class="text-gray-600 mb-6 text-lg leading-relaxed">Kami adalah produsen pupuk non-subsidi yang lahir dari komitmen untuk mendukung kedaulatan pangan Indonesia. Dengan fasilitas produksi modern dan selalu menjaga kualitas terbaik, kami mendedikasikan diri untuk menciptakan produk berkualitas tinggi, legal, dan terpercaya bagi para petani dan mitra kami.</p>
+                        <p class="font-semibold text-brand-green border-l-4 border-brand-gold pl-4">"Mendukung Kesejahteraan Petani melalui Inovasi dan Kualitas."</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        {{ partial "footer.html" . }}
+    </div>
+
+    {{ partial "js.html" . }}
+
+    <script>
+        // --- LOGIK MENU NAVIGASI ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+
+            if (menuBtn && mobileMenu) {
+                menuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                    if (mobileMenu.classList.contains('hidden')) {
+                        menuIcon.setAttribute('data-lucide', 'menu');
+                    } else {
+                        menuIcon.setAttribute('data-lucide', 'x');
+                    }
+                    if(window.lucide) lucide.createIcons();
+                });
+            }
+        });
+
+        // --- LOGIK ANIMASI INTRO ---
+        let currentStep = 0;
+        const actionBtn = document.getElementById('actionBtn');
+        const bag = document.getElementById('bag');
+        const plantContainer = document.getElementById('plant-container');
+        const canvas = document.getElementById('particles-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x; this.y = y; this.size = Math.random() * 4 + 2;
+                this.speedY = Math.random() * 5 + 3; this.speedX = (Math.random() - 0.5) * 4;
+                this.color = ['#1565C0', '#FFFFFF', '#FF6D00'][Math.floor(Math.random() * 3)];
+                this.life = 100;
+            }
+            update() {
+                this.y += this.speedY; this.x += this.speedX; this.speedY += 0.25; 
+                if (this.y > canvas.height - 120) { this.life -= 15; } 
+                else { this.life -= 0.8; }
+            }
+            draw() {
+                ctx.fillStyle = this.color; ctx.globalAlpha = this.life / 100;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach((p, i) => { p.update(); p.draw(); if (p.life <= 0) particles.splice(i, 1); });
+            if (particles.length > 0) requestAnimationFrame(animateParticles);
+        }
+
+        function nextStep() {
+            currentStep++;
+            if (currentStep === 1) {
+                actionBtn.innerText = "Beri Nutrisi! 🐯";
+                document.querySelectorAll('.leaf').forEach(l => l.style.transform = "scale(0.5) rotate(15deg)");
+                document.querySelector('.stem').style.stroke = "#795548";
+                switchText('text-1');
+            } else if (currentStep === 2) {
+                actionBtn.innerText = "Taburkan Sekarang!";
+                switchText('text-2');
+                bag.style.left = "65%";
+                setTimeout(() => { bag.style.transform = "translateX(-50%) rotate(-15deg)"; }, 400);
+            } else if (currentStep === 3) {
+                actionBtn.style.display = 'none';
+                bag.classList.add('shaking');
+                bag.style.transform = "translateX(-50%) rotate(-45deg)";
+                let pourInterval = setInterval(() => {
+                    const b = bag.getBoundingClientRect();
+                    for(let i=0; i<8; i++) particles.push(new Particle(b.left + 20, b.top + 180));
+                    requestAnimationFrame(animateParticles);
+                }, 40);
+                setTimeout(() => {
+                    clearInterval(pourInterval);
+                    bag.classList.remove('shaking'); bag.style.opacity = "0";
+                    growPlant();
+                }, 2000);
+            }
+        }
+
+        function switchText(id) {
+            document.querySelectorAll('.overlay-text').forEach(el => el.classList.remove('active-text'));
+            document.getElementById(id).classList.add('active-text');
+        }
+
+        // Fungsi Membesarkan Tanaman yang telah dibetulkan
+        function growPlant() {
+            document.querySelector('.ground').style.backgroundColor = "#FF6D00";
+            setTimeout(() => document.querySelector('.ground').style.backgroundColor = "#3E2723", 500);
+            document.querySelector('.stem').style.stroke = "#4CAF50";
+            // Memastikan transformasi kekal di tengah skrin
+            plantContainer.style.transform = "translateX(-50%) scale(1.4)";
+            document.querySelectorAll('.leaf').forEach(l => l.style.transform = "scale(1)");
+            setTimeout(() => {
+                document.querySelectorAll('.fruit').forEach(f => f.style.transform = "scale(1.3)");
+                switchText('text-3');
+            }, 1000);
+        }
+
+        function enterWebsite() {
+            document.getElementById('intro-screen').classList.add('intro-hidden');
+            document.body.classList.remove('no-scroll');
+            if(window.lucide) lucide.createIcons();
+        }
+
+        window.onload = () => {
+            // Set keadaan awal layu
+            document.querySelectorAll('.leaf').forEach(l => l.style.transform = "scale(0.3) rotate(20deg)");
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+baseurl = "https://sultaniskandarmuda.com"
+title = "Download Magisk - Best Android Root Solution"
+contentdir    = "content"
+layoutdir     = "layouts"
+publishdir    = "public"
+languageCode = "en"
+resourceDir = "../resources"
+DefaultContentLanguage = "en"
+markup.highlight.noClasses=false
+PygmentsCodeFences = true
+PygmentsStyle      = "monokai"
+buildFuture = false
+author = "bjorka6868"
+  
+[pagination]
+  disableAliases = false
+  pagerSize = 50
+  path = 'tags'
+  
+[sitemap]
+  changefreq = "always"
+  priority = 0.8
+  filename = "sitemap.xml"
+[permalinks]
+  modules = ":section/:slug"
+  blog   = "/b/:year:month/:slug"
+  etc    = "/etc/:year:month/:slug"
+  
+[params]
+  text_color = ""
+  author = "bjorka6868"
+  description = "Rooting your Android device gives you complete control over its operating system. Access hidden features, remove bloatware, install custom ROMs, and boost performance."
+  recent_posts_number = 3
+  searchableSections = ["modules", "blog"]  
+
+colorScheme = "auto"
+# Hide the toggle button, along with the associated vertical divider
+hideColorSchemeToggle = false
+# Series see also post count
+maxSeeAlsoItems = 5
+
+[markup.goldmark.renderer]
+  unsafe = true # agar bisa menulis html di markdo
+  
+enableGitInfo = true
+
+[frontmatter]
+lastmod = [":fileModTime"]
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[minify]
+  minifyOutput = true
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"] # Memastikan RSS tetap aktif untuk halaman utama
+  page = ["HTML"] # Memastikan RSS tetap aktif untuk halaman utama
+  section = ["HTML", "RSS", "JSON"]
+  taxonomy = ["HTML"] # Menonaktifkan RSS untuk daftar taksonomi
+  term = ["HTML"] # Menonaktifkan RSS untuk istilah taksonomi
+
+[outputFormats.JSON]
+  mediaType = "application/json"
+  baseName = "index"
+  isPlainText = false
+  notAlternative = true
+
+  

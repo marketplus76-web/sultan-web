@@ -1,0 +1,11 @@
+{{ partial "meta/html.html" . }}
+<title>{{ .Page.Title | default .Site.Title }}</title>
+{{ partial "meta/opengraph.html" . }}
+{{ partial "meta/schema.html" . }}
+{{ partial "meta/apple.html" . }}
+{{ partial "meta/seo.html" . }}
+{{ partial "meta/twitter.html" . }}
+{{ partial "framework.html" . }}
+{{ partial "meta/favicon.html" . }}
+{{ partial "google/adsense.html" . }}
+{{ partial "google/analytics.html" . }}

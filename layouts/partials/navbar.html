@@ -1,0 +1,43 @@
+{{/* File: layouts/partials/navbar.html (Versi Hardcoded Multi-Page) */}}
+<header id="beranda" class="bg-white/80 backdrop-blur-sm shadow-md sticky top-0 z-50 transition-colors duration-300">
+    <div class="container mx-auto px-6">
+        <nav class="py-3 flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold text-brand-green flex items-center">
+                <img src="/android-chrome-192x192.png" alt="Logo Macan Lembah" class="w-10 h-10 mr-2 rounded-full object-cover"/>
+                Macan Lembah
+            </a>
+            
+            <div class="hidden lg:flex space-x-5 items-center">
+                <a href="/" class="text-gray-700 hover:text-brand-green font-semibold">Home</a>
+                <a href="/produk/" class="text-gray-700 hover:text-brand-green font-semibold">Produk</a>
+                <a href="/izin/" class="text-gray-700 hover:text-brand-green font-semibold">Izin</a>
+                <a href="/visi-misi/" class="text-gray-700 hover:text-brand-green font-semibold">Visi Misi</a>
+                <a href="/galeri/" class="text-gray-700 hover:text-brand-green font-semibold">Galeri</a>
+                <a href="/kemitraan/" class="text-gray-700 hover:text-brand-green font-semibold">Kemitraan</a>
+                <a href="/tentang/" class="text-gray-700 hover:text-brand-green font-semibold">Tentang</a>
+            </div>
+
+            <div class="lg:hidden">
+                <button id="menu-btn" type="button" class="text-brand-green focus:outline-none" aria-label="Buka Menu">
+                    <i id="menu-icon" data-lucide="menu" class="w-8 h-8"></i>
+                </button>
+            </div>
+        </nav>
+    </div>
+
+    <div id="mobile-menu" class="hidden lg:hidden bg-white shadow-md">
+        <a href="/" class="block py-3 px-6 text-gray-700 hover:bg-stone-50 hover:text-brand-green font-semibold mobile-menu-link">Home</a>
+        <a href="/produk/" class="block py-3 px-6 text-gray-700 hover:bg-stone-50 hover:text-brand-green font-semibold mobile-menu-link">Produk</a>
+        <a href="/izin/" class="block py-3 px-6 text-gray-700 hover:bg-stone-50 hover:text-brand-green font-semibold mobile-menu-link">Izin</a>
+        <a href="/visi-misi/" class="block py-3 px-6 text-gray-700 hover:bg-stone-50 hover:text-brand-green font-semibold mobile-menu-link">Visi Misi</a>
+        <a href="/galeri/" class="block py-3 px-6 text-gray-700 hover:bg-stone-50 hover:text-brand-green font-semibold mobile-menu-link">Galeri</a>
+        <a href="/kemitraan/" class="block py-3 px-6 text-gray-700 hover:bg-stone-50 hover:text-brand-green font-semibold mobile-menu-link">Kemitraan</a>
+        <a href="/tentang/" class="block py-3 px-6 text-gray-700 hover:bg-stone-50 hover:text-brand-green font-semibold mobile-menu-link">Tentang</a>
+        <div class="p-4">
+             <a href="https://wa.me/6285857871536?text=Halo,%20saya%20tertarik%20dengan%20produk%20pupuk%20Macan%20Lembah." target="_blank" class="w-full text-center bg-brand-orange text-white px-5 py-2.5 rounded-full hover:bg-orange-600 transition duration-300 font-bold flex items-center justify-center space-x-2">
+                 <i data-lucide="phone"></i>
+                 <span>Kontak Cepat</span>
+             </a>
+        </div>
+    </div>
+</header>

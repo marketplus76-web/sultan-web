@@ -1,0 +1,38 @@
+
+<!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Swiper.js CSS for Slider -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Konfigurasi Kustom Tailwind -->
+    	
+
+<script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        'brand-green': '#1A4314', // Hijau Hutan Tua
+                        'brand-gold': '#E6A400',  // Emas Premium
+                        'brand-orange': '#F97316',// Oranye CTA
+                        'stone-50': '#FAFAF9',    // Latar Belakang Netral
+                    }
+                }
+            }
+        }
+    </script>
+    {{ $sassOptions := (dict "targetPath" "css/style.css" "outputStyle" "compressed" "enableSourceMap" true) }}
+{{ $styles := resources.Get "scss/main.scss" | toCSS $sassOptions | minify | fingerprint }}
+

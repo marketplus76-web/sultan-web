@@ -1,0 +1,17 @@
+
+    .swiper-slide-content { background-size: cover; background-position: center; }
+    .cta-section { background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=2070&auto-format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; }
+    .icon-box { transition: all 0.3s ease-in-out; }
+    .icon-box:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+    .swiper-pagination-bullet-active { background-color: #E6A400 !important; }
+    .swiper-button-next, .swiper-button-prev { color: #E6A400 !important; }
+
+    /* GANTI DENGAN KODE BARU INI */
+.card-active {
+    transform: translateY(1px);
+    /* Efek shadow biru yang lebih modern */
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.7);
+}
+.card-active h3 {
+    color: #3B82F6;
+}
